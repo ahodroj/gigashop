@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<servlet>
+		<servlet-name>BrowseCategories</servlet-name>
+		<servlet-class>com.gigaspaces.commerce.browseCategories</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>AddToShoppingCart</servlet-name>
+		<servlet-class>com.gigaspaces.commerce.shoppingCart</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ViewShoppingCart</servlet-name>
+		<servlet-class>com.gigaspaces.commerce.viewShoppingCart</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AddToShoppingCart</servlet-name>
+		<url-pattern>/addtocart</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ViewShoppingCart</servlet-name>
+		<url-pattern>/viewshoppingcart</url-pattern>
+	</servlet-mapping>
+	
+	<!-- session sharing configuration -->
+	<listener>
+	    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+	  </listener>
+	  <listener>
+	    <listener-class>com.gigaspaces.httpsession.sessions.GigaSpacesCacheManager</listener-class>
+	  </listener>
+	  <filter>
+	    <filter-name>GigaSpacesHttpSessionFilter</filter-name>
+	    <filter-class>com.gigaspaces.httpsession.web.GigaSpacesHttpSessionFilter</filter-class>
+	  </filter>
+	  <filter-mapping>
+	    <filter-name>GigaSpacesHttpSessionFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping>
+	<!-- end of session sharing configuration -->
+
+	<welcome-file-list>
+		<welcome-file>welcome.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>
